@@ -1,0 +1,25 @@
+name: python tests
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [ '2.7', '3.5', '3.6', '3.7', '3.8', 'pypy2', 'pypy3' ]
+        os: [windows-latest, ubuntu-latest] #, macos-latest]
+    name: ${{ matrix.os }} - Python ${{ matrix.python-version }}
+    steps:
+      - uses: actions/checkout@v1
+      - name: Setup python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+      - run: pip install -e .[toml] pytest
+      - run: pytest
