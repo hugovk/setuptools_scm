@@ -13,6 +13,11 @@ jobs:
       matrix:
         python-version: [ '2.7', '3.5', '3.6', '3.7', '3.8', 'pypy2', 'pypy3' ]
         os: [windows-latest, ubuntu-latest] #, macos-latest]
+        exclude:
+        - os: windows-latest
+          python-version: "2.7"
+        - os: windows-latest
+          python-version: "pypy2"
     name: ${{ matrix.os }} - Python ${{ matrix.python-version }}
     steps:
       - uses: actions/checkout@v1
