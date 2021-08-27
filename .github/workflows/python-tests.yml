@@ -16,7 +16,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python_version: [ '3.6', '3.7', '3.8', '3.9', 'pypy3' ]
+        python_version: [ '3.6', '3.7', '3.8', '3.9', '3.10-dev', 'pypy3' ]
         os: [windows-latest, ubuntu-latest] #, macos-latest]
         include:
         - os: windows-latest
@@ -24,7 +24,7 @@ jobs:
 
     name: ${{ matrix.os }} - Python ${{ matrix.python_version }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Setup python
         uses: actions/setup-python@v2
         if: matrix.python_version != 'msys2'
@@ -54,11 +54,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python_version: [  '3.6', '3.9', 'pypy3' ]
+        python_version: [  '3.6', '3.9', '3.10-dev', 'pypy3' ]
         installer: ["pip install"]
     name: check self install - Python ${{ matrix.python_version }} via ${{ matrix.installer }}
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - name: Setup python
         uses: actions/setup-python@v2
         with:
