@@ -3,10 +3,6 @@ name: python tests+artifacts+release
 on:
   pull_request:
   push:
-    branches:
-    - main
-    tags:
-    - "v*"
   release:
     types: [published]
 
